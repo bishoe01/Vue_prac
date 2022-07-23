@@ -4,25 +4,22 @@
         <img :src="oneroom[clickindex].image" alt="">
       <h4>{{oneroom[clickindex].title}}</h4>
       <p>{{oneroom[clickindex].content}}</p>
-      <!-- <select v-model.number="month">
+      <select v-model.number="month">
       <option>6</option>
       <option>12</option>
       <option>18</option>
       <option>24</option>
       </select><span>개월</span>
-       -->
-    <input v-model.number="month">
+      
       <p>{{month}}개월 : {{oneroom[clickindex].price * month}}만원</p>
       
-      <TheDiscount/>
       
-      <button @click="$emit('closeModal')" >Close</button>
+      <button @click="$emit('closeModal')">Close</button>
     </div>
   </div>
 </template>
 
 <script>
-import TheDiscount from './Discount.vue';
 export default {
     name: 'TheModal',
     data() {
@@ -31,17 +28,13 @@ export default {
         }
     },
     watch:{
-        month(a){
-            if(a > 13 ){
-                alert(`${a}는 13보다 큽니다.`)
-            }
-            else if(isNaN(a)){
-                alert(`${a}는 숫자가 아닙니다.`)
-                this.month = 1;
+        // month(a){
+            // if(isNaN(a)){
+            //     alert(`${a}는 숫자가 아닙니다.`)
+            //     this.month = 1;
                 
-            }
-            
-        }
+            // }
+        // }
     },
     props:{
         oneroom : Array,
@@ -49,8 +42,12 @@ export default {
         clickindex : Number,
     },
     components:{
-        TheDiscount,
-    }
+    },
+    beforeUpdate(){
+        if(this.month == 12){
+            alert(`${this.month}개월은 현재 대여가 불가능 합니다`)
+        }
+    },
 }
 </script>
 

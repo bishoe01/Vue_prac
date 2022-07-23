@@ -7,9 +7,12 @@
   <div class= "menu">
     <a v-for="(nav,i) in menus" :key="i">{{menus[i]}}</a>
   </div>
-  <TheDiscount/>
+  
+  <TheDiscount v-if="showDiscount == true" :discount_=discount_ />
 
-
+  <button @click="priceSort">가격 높은순</button>
+  <button @click="priceSort_reverse">가격 낮은순</button>
+  <button @click="backSort">원래대로</button>
   <TheCard @openModal="isModal=true; clickindex=$event" :oneroom="oneroom[i]" v-for="(a,i) in oneroom" :key="i"/>
 
     
@@ -20,6 +23,8 @@ import apple from "./oneroom.js";
 import TheDiscount from "./Discount.vue";
 import TheModal from "./Modal.vue";
 import TheCard from "./Card.vue";
+
+
 export default {
   name: 'App',
   data(){
@@ -32,19 +37,47 @@ export default {
       products : ['역삼','천호','마포구'],
       menus : ["Home", "Shop", "About"],
       room_image : ["./assets/room0.jpg","./assets/room1.jpg","./assets/room2.jpg"],
+      oneroom_original : [...apple],
       oneroom : apple,
+      Sorting : null,
+      showDiscount : true,
+      discount_ : 3,
     }
   },
   methods: {
     increase(i){
       this.cnt[i]++;
     },
+    priceSort(){
+      this.oneroom.sort(function(a,b){
+        return  b.price - a.price;
+      })
+    },
+    priceSort_reverse(){
+      this.oneroom.sort(function(a,b){
+        return  a.price - b.price;
+      })
+    },
+    backSort(){
+      this.oneroom = [...this.oneroom_original];
+    }
+  },
+  
+  mounted(){
+    setInterval(() => {
+      if(this.discount_ ==0){
+        this.showDiscount = false;
+      }
+      this.discount_-=1;
+      
+    }, 1000);
   },
   components: {
     TheDiscount,
     TheModal,
     TheCard,
 }
+
 }
 </script>
 
@@ -104,7 +137,7 @@ export default {
   transform: translateY(-1000px);
 }
 .fade-enter-active{
-  transition: all 1s;
+  transition: all 0.5s;
 }
 .fade-enter-to{
   transform: translateY(0px);

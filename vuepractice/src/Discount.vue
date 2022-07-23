@@ -8,6 +8,8 @@
 <script>
 export default {
     name : "TheDiscount",
+    props:{
+    }
 }
 </script>
 

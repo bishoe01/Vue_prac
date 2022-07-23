@@ -1,16 +1,16 @@
 <template>
-
-
  
-  <TheModal :oneroom="oneroom" :clickindex="clickindex" :isModal="isModal"/>
+ <transition name="fade">
+  <TheModal @closeModal="isModal=false" :oneroom="oneroom" :clickindex="clickindex" :isModal="isModal"/>
+</transition>
 
   <div class= "menu">
     <a v-for="(nav,i) in menus" :key="i">{{menus[i]}}</a>
   </div>
-  <TheCard :oneroom="oneroom" :clickindex="clickindex" :isModal="isModal"/>
-  <TheDiscount></TheDiscount>
-  
-  
+  <TheDiscount/>
+
+
+  <TheCard @openModal="isModal=true; clickindex=$event" :oneroom="oneroom[i]" v-for="(a,i) in oneroom" :key="i"/>
 
     
 </template>
@@ -24,6 +24,7 @@ export default {
   name: 'App',
   data(){
     return{
+      Object_ : {name : "kim", age: 20},
       clickindex : 0,
       isModal : false,
       cnt :  [0,0,0],
@@ -87,6 +88,26 @@ export default {
   padding: 10px;
   margin: 10px;
   border-radius: 5px;
+}
+
+.fade-leave-from{
+  opacity: 1;
+}
+.fade-leave-active{
+  transition: all 0.5s;
+}
+.fade-leave-to{
+  opacity: 0;
+}
+
+.fade-enter-from{
+  transform: translateY(-1000px);
+}
+.fade-enter-active{
+  transition: all 1s;
+}
+.fade-enter-to{
+  transform: translateY(0px);
 }
 
 

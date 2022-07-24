@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import apple from "./oneroom.js";
+import apple from "./shoes.js";
 import TheDiscount from "./Discount.vue";
 import TheModal from "./Modal.vue";
 import TheCard from "./Card.vue";
@@ -34,7 +34,6 @@ export default {
       isModal : false,
       cnt :  [0,0,0],
       price : [40,70,80],
-      products : ['역삼','천호','마포구'],
       menus : ["Home", "Shop", "About"],
       room_image : ["./assets/room0.jpg","./assets/room1.jpg","./assets/room2.jpg"],
       oneroom_original : [...apple],
@@ -100,7 +99,7 @@ export default {
   padding: 10px;
 }
 .room-img{
-  width: 100%;
+  width: 70%;
   margin-top: 40px;
   }
 .white-bg{

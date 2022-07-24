@@ -1,17 +1,17 @@
 <template>
    <div class="black-bg" v-if="isModal">
     <div class="white-bg">
-        <img :src="oneroom[clickindex].image" alt="">
+        <img class="CardImg" :src="oneroom[clickindex].image">
       <h4>{{oneroom[clickindex].title}}</h4>
       <p>{{oneroom[clickindex].content}}</p>
-      <select v-model.number="month">
-      <option>6</option>
-      <option>12</option>
-      <option>18</option>
-      <option>24</option>
-      </select><span>개월</span>
+      <select v-model.number="size">
+      <option>255</option>
+      <option>260</option>
+      <option>275</option>
+      <option>280</option>
+      </select>
       
-      <p>{{month}}개월 : {{oneroom[clickindex].price * month}}만원</p>
+      <p>{{oneroom[clickindex].price}}₩</p>
       
       
       <button @click="$emit('closeModal')">Close</button>
@@ -24,7 +24,7 @@ export default {
     name: 'TheModal',
     data() {
         return {
-            month : 1,
+            size : 255,
         }
     },
     watch:{
@@ -52,5 +52,8 @@ export default {
 </script>
 
 <style>
-
+.CardImg{
+    width: 400px;
+    height: 400px;
+}
 </style>

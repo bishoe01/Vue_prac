@@ -11,7 +11,7 @@
       <option>280</option>
       </select>
       
-      <p>{{oneroom[clickindex].price}}₩</p>
+      <p>{{oneroom[clickindex].price}}Won</p>
       
       
       <button @click="$emit('closeModal')">Close</button>

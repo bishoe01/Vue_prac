@@ -10,6 +10,7 @@
 
   <TheContainer :TimeLineData="TimeLineData"/>
 
+  <button @click="more">More</button>
   <div class="footer">
     <ul class="footer-button-plus">
       <input type="file" id="file" class="inputfile" />
@@ -21,6 +22,7 @@
 <script>
 import TimeLineData from "./data.js"
 import TheContainer from "./components/container.vue";
+import axios from 'axios';
 export default {
   name: "App",
   components: {
@@ -29,6 +31,19 @@ export default {
   data() {
     return {
       TimeLineData,
+      click: 0,
+      urlLink : "",
+    }
+  },
+  methods: {
+    more(){
+      if(this.click == 0) this.urlLink = "https://codingapple1.github.io/vue/more0.json"
+      else this.urlLink =  "https://codingapple1.github.io/vue/more1.json"
+      axios.get(this.urlLink)
+      .then((result) => {
+        this.TimeLineData.push(result.data)
+        this.click++;
+      })
     }
   },
   

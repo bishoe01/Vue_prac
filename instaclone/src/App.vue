@@ -8,7 +8,7 @@
     </ul>
   </div>
 
-  <TheContainer :TimeLineData="TimeLineData"/>
+  <TheContainer :TimeLineData="TimeLineData" :step="step"/>
 
   <button @click="more">More</button>
   <div class="footer">
@@ -17,6 +17,8 @@
       <label for="file" class="input-plus">+</label>
     </ul>
   </div>
+
+
 </template>
 
 <script>
@@ -33,6 +35,7 @@ export default {
       TimeLineData,
       click: 0,
       urlLink : "",
+      step : 0,
     }
   },
   methods: {

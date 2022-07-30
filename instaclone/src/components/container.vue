@@ -1,18 +1,22 @@
 <template>
   <div>
   <div v-if="step==0">
-  <ThePost :TimeLineData='TimeLineData[i]' v-for="(a,i) in TimeLineData" :key="i"/>
+  <ThePost :TimeLineData='TimeLineData[i]' v-for="(a,i) in TimeLineData" :key="i">
+  {{a.name}}
+  </ThePost>
   </div>
   
   
   <div v-if="step==1">
-    <div class="upload-image" :style="{backgroundImage : `url(${imgurl})`}"></div>
+    <div class="upload-image" :class="Filter_selected" :style="{backgroundImage : `url(${imgurl})`}"></div>
     <div class="filters">
-      <FilterBox v-for="(a,i) in FilterCategory" :key="i" :previewFilter="imgurl" :Filter="a"/>
+      <FilterBox v-for="(a,i) in FilterCategory" :key="i" :previewFilter="imgurl" :Filter="a">
+      <span style="color:black">{{FilterCategory[i]}}</span>
+      </FilterBox>
     </div>
   </div>
   <div v-if="step==2">
-    <div class="upload-image" :style="{backgroundImage : `url(${imgurl})`}"></div>
+    <div :class="Filter_selected" class="upload-image" :style="{backgroundImage : `url(${imgurl})`}"></div>
     <div class="write">
     <textarea @input="$emit('write', $event.target.value)" class="write-box">write!</textarea>
     </div>
@@ -39,7 +43,13 @@ export default {
     data() {
       return {
         FilterCategory,
+        Filter_selected : '',
       }
+    },
+    mounted() {
+      this.emitter.on("Filter_click", (a)=> {
+        this.Filter_selected = a
+      })
     },
 }
 </script>

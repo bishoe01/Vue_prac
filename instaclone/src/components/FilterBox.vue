@@ -1,5 +1,7 @@
 <template>
-<div class="filter-item" :class="Filter" :style="{backgroundImage : `url(${previewFilter})`}">
+<div @click="fire" class="filter-item" :class="Filter" :style="{backgroundImage : `url(${previewFilter})`}">
+    <slot></slot>
+    
 </div>
 </template>
 
@@ -9,7 +11,17 @@ export default {
     props:{
         previewFilter: String,
         Filter : String,
-    }
+    },
+    data() {
+        return {
+            msg : 'Hello',
+        }
+    },
+    methods: {
+        fire(){
+            this.emitter.emit('Filter_click',this.Filter);
+        }
+    },
 }
 </script>
 

@@ -2,9 +2,9 @@
   <div class="post">
     <div class="post-header">
       <div class="profile" :style="{backgroundImage : `url(${TimeLineData.userImage})`}"></div>
-      <span class="profile-name">{{TimeLineData.name}}</span>
+      <span class="profile-name"><slot></slot></span>
     </div>
-    <div class="post-body" :style="{backgroundImage :`url(${TimeLineData.postImage}`}"></div>
+    <div :class="TimeLineData.filter" class="post-body" :style="{backgroundImage :`url(${TimeLineData.postImage}`}"></div>
     <div class="post-content">
       <p>👍 {{TimeLineData.likes}}</p>
       <p><strong>{{TimeLineData.name}}</strong> {{TimeLineData.content}}</p>

@@ -9,7 +9,8 @@
     </ul>
   </div>
 
-  <TheContainer  @write="content_writing = $event" :TimeLineData="TimeLineData" :step="step" :imgurl="imgurl"/>
+  <TheContainer  @write="content_writing = $event" :TimeLineData="TimeLineData" :step="step" :imgurl="imgurl">
+  </TheContainer>
 
   <button @click="more">More</button>
   <div class="footer">
@@ -42,7 +43,13 @@ export default {
       urlLink : "",
       step : 0,
       imgurl : "",
+      filter_selected : "",
     }
+  },
+  mounted(){
+    this.emitter.on('Filter_click', (a)=>{
+      this.filter_selected = a;
+    });
   },
   methods: {
     more(){
@@ -69,7 +76,7 @@ export default {
         date: "May 15",
         liked: false,
         content: this.content_writing,
-        filter: "perpetua"
+        filter: this.filter_selected,
       };
       this.TimeLineData.unshift(uploadwriting);
       this.step = 0 ;

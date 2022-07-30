@@ -3,8 +3,10 @@
   <div v-if="step==0">
   <ThePost :TimeLineData='TimeLineData[i]' v-for="(a,i) in TimeLineData" :key="i"/>
   </div>
+  
+  
   <div v-if="step==1">
-    <div class="upload-image"></div>
+    <div class="upload-image" :style="{backgroundImage : `url(${imgurl})`}"></div>
     <div class="filters">
     <div class="filter-1"></div>
     <div class="filter-1"></div>
@@ -14,9 +16,9 @@
     </div>
   </div>
   <div v-if="step==2">
-    <div class="upload-image"></div>
+    <div class="upload-image" :style="{backgroundImage : `url(${imgurl})`}"></div>
     <div class="write">
-    <textarea class="write-box">write!</textarea>
+    <textarea @input="$emit('write', $event.target.value)" class="write-box">write!</textarea>
     </div>
   </div>
 </div>
@@ -33,6 +35,7 @@ export default {
     props:{
       TimeLineData : Object,
       step: Number,
+      imgurl: String,
     }
 }
 </script>

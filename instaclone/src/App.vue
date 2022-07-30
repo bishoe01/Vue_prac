@@ -4,19 +4,22 @@
       <li>Cancel</li>
     </ul>
     <ul class="header-button-right">
-      <li>Next</li>
+      <li v-if="step==1" @click="step++;">Next</li>
+      <li v-if="step==2" @click="publish">Next</li>
     </ul>
   </div>
 
-  <TheContainer :TimeLineData="TimeLineData" :step="step"/>
+  <TheContainer :TimeLineData="TimeLineData" :step="step" :imgurl="imgurl" @write="content_writing = $event"/>
 
   <button @click="more">More</button>
   <div class="footer">
     <ul class="footer-button-plus">
-      <input type="file" id="file" class="inputfile" />
+      <input @change="upload" multiple type="file" id="file" class="inputfile" />
       <label for="file" class="input-plus">+</label>
     </ul>
   </div>
+
+
 
 
 </template>
@@ -25,17 +28,20 @@
 import TimeLineData from "./data.js"
 import TheContainer from "./components/container.vue";
 import axios from 'axios';
+
 export default {
   name: "App",
   components: {
     TheContainer,
   },
+  
   data() {
     return {
       TimeLineData,
       click: 0,
       urlLink : "",
       step : 0,
+      imgurl : "",
     }
   },
   methods: {
@@ -47,6 +53,26 @@ export default {
         this.TimeLineData.push(result.data)
         this.click++;
       })
+    },
+    upload(e){
+      let file = e.target.files;
+      this.imgurl = URL.createObjectURL(file[0]);
+      console.log(this.imgurl);
+      this.step = 1;
+    },
+    publish(){
+      var uploadwriting = {
+        name: "Kim Hyun",
+        userImage: "https://placeimg.com/100/100/arch",
+        postImage: this.imgurl,
+        likes: 36,
+        date: "May 15",
+        liked: false,
+        content: this.content_writing,
+        filter: "perpetua"
+      };
+      this.TimeLineData.unshift(uploadwriting);
+      this.step = 0 ;
     }
   },
   

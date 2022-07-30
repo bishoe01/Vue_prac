@@ -8,11 +8,7 @@
   <div v-if="step==1">
     <div class="upload-image" :style="{backgroundImage : `url(${imgurl})`}"></div>
     <div class="filters">
-    <div class="filter-1"></div>
-    <div class="filter-1"></div>
-    <div class="filter-1"></div>
-    <div class="filter-1"></div>
-    <div class="filter-1"></div>
+      <FilterBox v-for="(a,i) in FilterCategory" :key="i" :previewFilter="imgurl" :Filter="a"/>
     </div>
   </div>
   <div v-if="step==2">
@@ -27,16 +23,24 @@
 
 <script>
 import ThePost from './post.vue'
+import FilterBox from './FilterBox.vue'
+import FilterCategory from '@/FilterCategory'
 export default {
     name: "TheContainer",
     components: {
-      ThePost
-    },
+    ThePost,
+    FilterBox,
+},
     props:{
       TimeLineData : Object,
       step: Number,
       imgurl: String,
-    }
+    },
+    data() {
+      return {
+        FilterCategory,
+      }
+    },
 }
 </script>
 

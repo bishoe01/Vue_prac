@@ -9,7 +9,7 @@
     </ul>
   </div>
 
-  <TheContainer :TimeLineData="TimeLineData" :step="step" :imgurl="imgurl" @write="content_writing = $event"/>
+  <TheContainer  @write="content_writing = $event" :TimeLineData="TimeLineData" :step="step" :imgurl="imgurl"/>
 
   <button @click="more">More</button>
   <div class="footer">

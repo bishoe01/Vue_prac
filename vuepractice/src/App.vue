@@ -1,6 +1,6 @@
 <template>
- 
- <transition name="fade">
+
+<transition name="fade">
   <TheModal @closeModal="isModal=false" :oneroom="oneroom" :clickindex="clickindex" :isModal="isModal"/>
 </transition>
 

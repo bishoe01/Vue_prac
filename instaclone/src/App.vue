@@ -8,11 +8,14 @@
       <li v-if="step==2" @click="publish">Next</li>
     </ul>
   </div>
-
+  <h4>안녕 {{$store.state.age}}</h4>
+  <p>{{$store.state.more}}</p>
+  <button @click="$store.dispatch('getData')">MORE</button>
   <TheContainer  @write="content_writing = $event" :TimeLineData="TimeLineData" :step="step" :imgurl="imgurl">
   </TheContainer>
 
-  <button @click="more">More</button>
+  <p>{{age}} {{likes}}</p>
+
   <div class="footer">
     <ul class="footer-button-plus">
       <input @change="upload" multiple type="file" id="file" class="inputfile" />
@@ -29,13 +32,19 @@
 import TimeLineData from "./data.js"
 import TheContainer from "./components/container.vue";
 import axios from 'axios';
+import { mapMutations, mapState } from "vuex";
 
 export default {
   name: "App",
   components: {
     TheContainer,
   },
-  
+  computed : { //다시 실행 불가
+    name(){
+      return this.$store.state.name
+    },
+    ...mapState(['name','age','likes'])
+  },
   data() {
     return {
       TimeLineData,
@@ -44,14 +53,19 @@ export default {
       step : 0,
       imgurl : "",
       filter_selected : "",
+      Counter: 0,
     }
   },
+  
   mounted(){
     this.emitter.on('Filter_click', (a)=>{
       this.filter_selected = a;
     });
   },
   methods: {
+    now(){
+      return new Date();
+    },
     more(){
       if(this.click == 0) this.urlLink = "https://codingapple1.github.io/vue/more0.json"
       else this.urlLink =  "https://codingapple1.github.io/vue/more1.json"

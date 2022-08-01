@@ -1,12 +1,12 @@
 <template>
   <div class="post">
     <div class="post-header">
-      <div class="profile" :style="{backgroundImage : `url(${TimeLineData.userImage})`}"></div>
+      <div  class="profile" :style="{backgroundImage : `url(${TimeLineData.userImage})`}"></div>
       <span class="profile-name"><slot></slot></span>
     </div>
-    <div :class="TimeLineData.filter" class="post-body" :style="{backgroundImage :`url(${TimeLineData.postImage}`}"></div>
+    <div @click="$store.commit('likeit',1)" :class="TimeLineData.filter" class="post-body" :style="{backgroundImage :`url(${TimeLineData.postImage}`}"></div>
     <div class="post-content">
-      <p>👍 {{TimeLineData.likes}}</p>
+      <p>👍{{$store.state.likes}}</p>
       <p><strong>{{TimeLineData.name}}</strong> {{TimeLineData.content}}</p>
       <p class="date">{{TimeLineData.date}}</p>
     </div>

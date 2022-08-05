@@ -8,13 +8,9 @@
       <li v-if="step==2" @click="publish">Next</li>
     </ul>
   </div>
-  <h4>안녕 {{$store.state.age}}</h4>
-  <p>{{$store.state.more}}</p>
-  <button @click="$store.dispatch('getData')">MORE</button>
   <TheContainer  @write="content_writing = $event" :TimeLineData="TimeLineData" :step="step" :imgurl="imgurl">
   </TheContainer>
 
-  <p>{{age}} {{likes}}</p>
 
   <div class="footer">
     <ul class="footer-button-plus">
@@ -32,7 +28,7 @@
 import TimeLineData from "./data.js"
 import TheContainer from "./components/container.vue";
 import axios from 'axios';
-import { mapMutations, mapState } from "vuex";
+import {  mapState } from "vuex";
 
 export default {
   name: "App",
